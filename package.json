@@ -2,6 +2,8 @@
   "name": "doi-adder",
   "displayName": "Doi Adder",
   "description": "This package allows you to quickly add bibtex references to a bib file from the DOI.",
+  "publisher": "zccajgb",
+  "repository": "https://github.com/zccajgb/doi-adder",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.60.0"
