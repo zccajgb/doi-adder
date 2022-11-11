@@ -1,7 +1,7 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 const vscode = require('vscode');
-const { getCitationInfo, convertToBib, saveBibEntry } = require('./getBibEntry');
+const { getCitationInfo, convertToBib, convertToBibSnippet, saveBibEntry } = require('./getBibEntry');
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 
@@ -15,15 +15,15 @@ function activate(context) {
 	console.log('Congratulations, your extension "doi-adder" is now active!');
 
 
-	let disposable = vscode.commands.registerCommand('doi-adder.doiAdd', async function () {
+	context.subscriptions.push(vscode.commands.registerCommand('doi-adder.doiAdd', async function () {
 
 		let doi = await vscode.window.showInputBox({
-			title: 'Enter DOI or URL TEST',
+			title: 'Enter DOI or URL',
 		});
 
 		let bibPromise = getCitationInfo(doi)
 			.catch(err => vscode.window.showErrorMessage(err))
-			.then(citationInfo => convertToBib(citationInfo, doi));
+			.then(citationInfo => convertToBib(doi, citationInfo));
 
 		let path = await vscode.window.showInputBox({
 			title: 'Bib File Location',
@@ -36,9 +36,27 @@ function activate(context) {
 					vscode.window.showErrorMessage(err);
 			})
 			.then(() => vscode.window.showInformationMessage('Bib Info Added To File'));
-	});
+	}));
 
-	context.subscriptions.push(disposable);
+	context.subscriptions.push(vscode.commands.registerCommand('doi-adder.doiInsert', async function () {
+
+		let doi = await vscode.window.showInputBox({
+			title: 'Enter DOI or URL',
+		});
+
+		let bibPromise = getCitationInfo(doi)
+			.catch(err => vscode.window.showErrorMessage(err))
+			.then(citationInfo => convertToBibSnippet(doi, citationInfo));
+
+		await bibPromise
+			.then(bibSnippet => {
+					vscode.window.activeTextEditor.insertSnippet(bibSnippet);
+			})
+			.catch(err => {
+					vscode.window.showErrorMessage(err);
+			})
+			.then(() => vscode.window.showInformationMessage('Bib Info Inserted At Cursor'));
+	}));
 }
 
 // this method is called when your extension is deactivated
