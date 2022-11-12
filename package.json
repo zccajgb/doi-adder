@@ -1,7 +1,7 @@
 {
   "name": "doi-adder",
   "displayName": "DOI Adder",
-  "description": "This package allows you to quickly add bibtex references to a bib file from the DOI.",
+  "description": "This package allows you to quickly add BibTeX references to a `.bib` file from the DOI.",
   "publisher": "zccajgb",
   "repository": "https://github.com/zccajgb/doi-adder",
   "version": "1.0.1",
@@ -31,10 +31,11 @@
       "title": "DOI Adder",
       "properties": {
         "doi-adder.refName": {
+          "description": "Specifies the format for the inserted reference name (citekey)",
           "type": "string",
           "default": "authorYear",
           "enum": ["authorYear", "doi"],
-          "markdownEnumDescriptions": ["Use `authorYYYY` for citekey", "Use `doi` for citekey"]
+          "markdownEnumDescriptions": ["Use `lastnameYYYY` for citekey", "Use `doi` for citekey"]
         }
       }
     }
