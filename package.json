@@ -1,10 +1,10 @@
 {
   "name": "doi-adder",
-  "displayName": "Doi Adder",
-  "description": "This package allows you to quickly add bibtex references to a bib file from the DOI.",
+  "displayName": "DOI Adder",
+  "description": "This package allows you to quickly add BibTeX references to a `.bib` file from the DOI.",
   "publisher": "zccajgb",
   "repository": "https://github.com/zccajgb/doi-adder",
-  "version": "0.0.2",
+  "version": "1.0.1",
   "engines": {
     "vscode": "^1.60.0"
   },
@@ -12,16 +12,33 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:doi-adder.doiAdd"
+    "onCommand:doi-adder.doiAdd",
+    "onCommand:doi-adder.doiInsert"
   ],
   "main": "./dist/extension",
   "contributes": {
     "commands": [
       {
         "command": "doi-adder.doiAdd",
-        "title": "DOI Add"
+        "title": "DOI: Add entry to file"
+      },
+      {
+        "command": "doi-adder.doiInsert",
+        "title": "DOI: Insert entry"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "DOI Adder",
+      "properties": {
+        "doi-adder.refName": {
+          "description": "Specifies the format for the inserted reference name (citekey)",
+          "type": "string",
+          "default": "authorYear",
+          "enum": ["authorYear", "doi"],
+          "markdownEnumDescriptions": ["Use `lastnameYYYY` for citekey", "Use `doi` for citekey"]
+        }
+      }
+    }
   },
   "scripts": {
     "lint": "eslint .",
@@ -47,6 +64,7 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "bibtex": "^0.9.0",
     "jquery": "^3.6.0",
     "jsdom": "^17.0.0",
     "open": "^8.2.1",
