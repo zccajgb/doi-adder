@@ -45,6 +45,9 @@ const convertToBib = (doi, citationInfo) => {
   if (refName !== undefined) {
     citationInfo = citationInfo.replace(/(@[a-zA-Z]+{).*?,/, `$1${refName},`);
   }
+  if (citationInfo.includes("$\\less$")) {
+    citationInfo = citationInfo.replaceAll(/(\$\\less(.*?)\$\\greater\$)/g, '');
+  }
   citationInfo += '\n';
 
   return citationInfo;
