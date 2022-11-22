@@ -18,3 +18,6 @@
 
 - Added `DOI: Insert entry` command.
 - Added config option to switch between `doi` and `authorYYYY` citekey format.
+
+# [1.0.2]
+- fixed bug when bibtex response includes html

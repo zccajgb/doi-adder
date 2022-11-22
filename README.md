@@ -59,3 +59,6 @@ This extension has no extenal requirements.
 ### [1.0.1]
 - Added `DOI: Insert entry` command.
 - Added config option to switch between `doi` and `authorYYYY` citekey formats.
+
+### [1.0.2]
+- fixed bug when bibtex response includes html
