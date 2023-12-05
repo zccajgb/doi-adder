@@ -25,9 +25,14 @@ const  getCitationInfo = async (doi) => {
 
 const genRefName = (doi, citationInfo) => {
   const config = vscode.workspace.getConfiguration('doi-adder');
-  let refName;
+  let refName = "";
   if (config.get('refName') == "authorYear") {
-    const bibEntry = Object.values(bibtex.parseBibFile(citationInfo).entries$)[0];
+    try {
+      const bibEntry = Object.values(bibtex.parseBibFile(citationInfo).entries$)[0];
+    } catch (error) {
+      console.error(error);
+      return refName;
+    }
     const firstAuthor = Object.values(bibEntry.getField("author").authors$)[0];
     const authorName = firstAuthor.vons.concat(firstAuthor.lastNames).join('').toLowerCase();
     const year = bibEntry.getField("year");
