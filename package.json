@@ -4,7 +4,7 @@
   "description": "This package allows you to quickly add BibTeX references to a `.bib` file from the DOI.",
   "publisher": "zccajgb",
   "repository": "https://github.com/zccajgb/doi-adder",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "engines": {
     "vscode": "^1.60.0"
   },

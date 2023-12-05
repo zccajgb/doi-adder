@@ -21,3 +21,6 @@
 
 # [1.0.2]
 - fixed bug when bibtex response includes html
+
+# [1.0.3]
+- made ref name generation fail gracefully when bibtex parsing fails
